@@ -4,6 +4,7 @@ const jsonwebtoken = require("jsonwebtoken");
 const User = require("./db/users");
 const Order = require("./db/orders");
 const { graphqlHTTP } = require("express-graphql");
+const path = require("path");
 
 const app = express();
 app.use(express.json());
@@ -118,6 +119,13 @@ app.post("/check-token", (req, res) => {
     }
   );
 });
+
+// for all endpoints
+
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
+
 app.listen(6070, function () {
   console.log("code is chaling now");
 });
